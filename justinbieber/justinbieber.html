@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justin Bieber Fan Page</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+        header {
+            background-color: #000;
+            color: #f0f0f0; /* Changed header text color to black */
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 2px -2px gray;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            overflow: hidden;
+        }
+
+        /* Scrollable Gallery Styles */
+        .gallery-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .scrollable-gallery {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 15px;
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+            width: 100%;
+            scroll-snap-type: x mandatory;
+        }
+        .scrollable-gallery img {
+            height: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+        }
+        .scrollable-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* Fun Facts Section */
+        .fun-facts {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .fun-facts h2 {
+            font-size: 2em;
+            color: #000;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .fun-facts h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #FF6B6B;
+            margin: 10px auto;
+        }
+        .fun-facts ul {
+            list-style-type: none;
+            padding: 0;
+            font-size: 1.1em;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .fun-facts li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .fun-facts li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .fun-facts li::before {
+            content: "🎤";
+            position: absolute;
+            left: -10px;
+            top: -10px;
+            background-color: #FF6B6B;
+            color: white;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+        }
+
+        /* Social Media Links */
+        .social-media {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .social-media a {
+            margin: 0 15px;
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+        }
+        .social-media img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        .social-media img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Lightbox Styles */
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        #lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        #lightbox:target {
+            display: flex;
+        }
+        #lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2em;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+            outline: none;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            margin-top: 40px;
+        }
+
+        /* Button to scroll back to top */
+        #backToTop {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #FF6B6B;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: none;
+            transition: all 0.3s ease;
+        }
+        #backToTop:hover {
+            background-color: #ff4b4b;
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Justin Bieber Fan Page</h1>
+    </header>
+    
+    <div class="container">
+        <!-- Scrollable Gallery with Arrows -->
+        <div class="gallery-wrapper">  
+            <section class="scrollable-gallery" id="gallery">
+                <img src="justin1.jpg" alt="Justin Bieber" onclick="showImage('justin1.jpg')">
+                <img src="justin2.jpg" alt="Justin Bieber" onclick="showImage('justin2.jpg')">
+                <img src="justin3.jpg" alt="Justin Bieber" onclick="showImage('justin3.jpg')">
+                <img src="justin4.jpg" alt="Justin Bieber" onclick="showImage('justin4.jpg')">
+                <img src="justin5.jpg" alt="Justin Bieber" onclick="showImage('justin5.jpg')">
+                <img src="justin6.jpg" alt="Justin Bieber" onclick="showImage('justin6.jpg')">
+            </section>   
+        </div>
+        <!-- Fun Facts Section -->
+        <section class="fun-facts">
+            <h2>Fun Facts about Justin Bieber</h2>
+            <ul>
+                <li>Justin Bieber was discovered on YouTube in 2008 by Scooter Braun.</li>
+                <li>His debut album "My World" made him the first artist to have seven songs from a debut record on the Billboard Hot 100.</li>
+                <li>Justin is the youngest artist to have five number-one albums in the U.S., a record previously held by Elvis Presley.</li>
+                <li>Justin has a clothing line called "Drew House," known for its comfy, casual style.</li>
+            </ul>
+        </section>
+
+        <!-- Social Media Links -->
+        <div class="social-media">
+            <a href="https://twitter.com/justinbieber" target="_blank">
+                <img src="https://cdn.vectorstock.com/i/500p/47/55/x-logo-twitter-new-icon-vector-48174755.jpgg" alt="Twitter Logo">
+            </a>
+            <a href="https://www.instagram.com/justinbieber/" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
+            </a>
+            <a href="https://www.facebook.com/JustinBieber" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
+            </a>
+            <a href="https://www.youtube.com/user/kidrauhl" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube Logo">
+            </a>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" onclick="hideLightbox()">
+        <button class="close" onclick="hideLightbox()">×</button>
+        <img id="lightboxImage" src="" alt="Justin Bieber">
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" onclick="scrollToTop()">↑ Top</button>
+
+    <footer>
+        <p>&copy; 2024 Justin Bieber Fan Page. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Lightbox functions
+        function showImage(src) {
+            document.getElementById('lightboxImage').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function hideLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // Scroll gallery
+        function scrollGallery(offset) {
+            document.getElementById('gallery').scrollBy({
+                left: offset,
+                behavior: 'smooth'
+            });
+        }
+
+        // Auto-scroll gallery
+        function autoScrollGallery() {
+            const gallery = document.getElementById('gallery');
+            const maxScrollLeft = gallery.scrollWidth - gallery.clientWidth;
+
+            if (gallery.scrollLeft >= maxScrollLeft) {
+                gallery.scrollTo({
+                    left: 0,
+                    behavior: 'smooth'
+                });
+            } else {
+                gallery.scrollBy({
+                    left: 300,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        setInterval(autoScrollGallery, 2000); // Adjust the time interval as needed
+
+        // Scroll back to top
+        window.onscroll = function() {
+            var backToTopButton = document.getElementById('backToTop');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Close lightbox when clicking outside the image
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target.id === 'lightbox') {
+                hideLightbox();
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+            
